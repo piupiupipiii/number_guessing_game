@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Permainan Tebak Angka</title>
+</head>
+<body>
+    <script>
+        function main() {
+            //variabel yang menyimpan angka acak antara 1 sampai dengan 100//
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            let attempts = 0; //untuk menghitung jumlah percobaan user//
+            let guessedCorrectly = false; //untuk menebak apakah user sudah menebak dengan benar//
+
+            //looping akan terus berjalan selama user menjawab salah//
+            while (!guessedCorrectly) { 
+                let userGuess = prompt("Tebak angka antara 1 dan 100:"); //untuk memunculkan box dialog inputan//
+                userGuess = parseInt(userGuess, 10); //mengonversi input user menajdi bilbut (bilangan bulat)//
+
+                //jika jawaban masih salah, maka akan muncul notif jawaban user lebih kecil atau lebih besar 
+                //dan kembali melanjutkan loop//
+                if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                    alert("Masukkan angka antara 1 dan 100.");
+                    continue;
+                }
+                //menambah jumlah percobaan//
+                attempts += 1;
+
+                //jika tebakan benar
+                if (userGuess === randomNumber) {
+
+                    const message = `Angka yang Anda tebak benar! Banyak percobaan: ${attempts}`;
+                    alert(message);
+
+
+                    //maka kotak dialog muncul dengan pilihan button melanjutkan game atau keluar dari game
+                    const continueGame = confirm("Ingin melanjutkan game?");
+                    if (continueGame) {
+
+                        //jika memilih melajutkan maka kembali ke function awal
+                        main();
+                    } else {
+ 
+                        //jika tidak, permainan dihetikan
+                        alert("Terima kasih sudah bermain!");
+                        break;
+                    }
+                } else if (userGuess < randomNumber) {
+                    alert("Angka yang Anda tebak lebih kecil. Coba lagi.");
+                } else {
+                    alert("Angka yang Anda tebak lebih besar. Coba lagi.");
+                }
+            }
+        }
+
+        main();
+    </script>
+</body>
+</html>
